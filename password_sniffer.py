@@ -21,7 +21,7 @@ def get_login(packet):
             # packet[<layer_name>].<field_name>
             load = packet.getlayer(scapy.Raw).load  # .decode(encoding='ascii', errors='ignore')
 
-            keywords = ('user', 'name', 'input', 'login', 'pass', 'password')
+            keywords = ('user', 'name', 'login', 'pass')
 
             for key in keywords:
                 if key in load:
