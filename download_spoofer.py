@@ -1,7 +1,6 @@
 import netfilterqueue
 import scapy.all as scapy
-from scapy.layers.inet import IP, UDP, TCP
-from scapy.layers.dns import DNSRR, DNSQR, DNS
+from scapy.layers.inet import IP, TCP
 
 
 target_file = '.exe'
