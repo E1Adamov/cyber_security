@@ -19,9 +19,9 @@ def process_packet(packet):
             scapy_packet[DNS].ancount = 1
 
             del scapy_packet[IP].len
-            del scapy_packet[IP].checksum
+            del scapy_packet[IP].chksum
             del scapy_packet[UDP].len
-            del scapy_packet[UDP].checksum
+            del scapy_packet[UDP].chksum
 
             packet.set_payload(str(scapy_packet))
     packet.accept()
